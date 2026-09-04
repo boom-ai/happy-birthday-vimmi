@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Happy Birthday, Vimmi ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4" />
+</head>
+<body>
+
+<!-- ambient layers -->
+<div id="grain" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
+<div id="hearts-bg" aria-hidden="true"></div>
+
+<!-- the single continuous story -->
+<main id="story" role="main">
+
+  <!-- CHAPTER 0: THE OPENING - full screen, photo collage, giant type -->
+  <section id="ch0" class="chapter">
+    <div class="collage" id="collage">
+      <div class="collage-blur" id="collageBlur"></div>
+      <div class="collage-grid" id="collageGrid"></div>
+    </div>
+    <div class="opening-text">
+      <p class="kicker">a completely unnecessary amount of effort</p>
+      <h1>
+        <span class="word" data-word="0">HAPPY</span>
+        <span class="word" data-word="1">BIRTHDAY</span>
+        <span class="word" data-word="2">VIMMI</span>
+        <span class="heart-main" aria-hidden="true">❤️</span>
+      </h1>
+      <p class="sub">Today is officially your day.</p>
+      <p class="sub">And yes... I made you a whole website. <span class="muted">(sorry not sorry)</span></p>
+      <button id="enterBtn" class="enter-btn"><span>LET'S GO ❤️</span></button>
+      <p class="hint">tap the button. you know you want to 👇</p>
+    </div>
+    <div class="sticker s1" aria-hidden="true">starring: vimmi ✦</div>
+    <div class="sticker s2" aria-hidden="true">meet-cute: computer lab • 10 jan</div>
+  </section>
+
+  <!-- CHAPTER 1: I LOVE YOU - the giant button moment -->
+  <section id="ch1" class="chapter">
+    <p class="kicker">okay. deep breath.</p>
+    <h2>Okay...</h2>
+    <p>I have something important to ask you. Well. Tell you. Same thing.</p>
+    <div class="love-zone">
+      <button id="iloveBtn" class="ilove-btn">I LOVE YOU ❤️</button>
+      <p class="note">(go on. press the comically large button.)</p>
+    </div>
+    <div id="loveReveal" class="reveal hidden">
+      <h2>I LOVE YOU, <span class="gf">VIMMI</span> ❤️</h2>
+      <p>Okay... now that we've established that...</p>
+      <p class="muted">I love you too. Even though I know SRK probably gets more attention. 👑😭 <em>(had to say it early)</em></p>
+    </div>
+  </section>
+
+  <!-- CHAPTER 2: DO YOU LOVE ME - runaway NO -->
+  <section id="ch2" class="chapter">
+    <p class="kicker">very serious question. extremely official.</p>
+    <h2>Okay <span class="gf">Vimmi</span>...</h2>
+    <p>One very important question.</p>
+    <div class="ask-card">
+      <h3>DO YOU LOVE ME? ❤️</h3>
+      <div class="arena" id="arena1">
+        <button class="btn-yes" id="yes1">YES ❤️</button>
+        <button class="btn-no" id="no1">NO 😈</button>
+        <p class="taunt" id="taunt1">choose wisely. one of these buttons is shy.</p>
+      </div>
+    </div>
+    <div id="yesReveal1" class="reveal hidden">
+      <h2>I KNEW IT. ❤️</h2>
+      <p>Good choice, <span class="gf">Vimmi</span>.</p>
+      <p class="muted">Now let's continue. That NO button never stood a chance.</p>
+    </div>
+  </section>
+
+  <!-- CHAPTER 3: 10 JANUARY - the beginning -->
+  <section id="ch3" class="chapter chapter-cinema">
+    <p class="kicker">rewind ⏪</p>
+    <h2 class="date-giant">10 JANUARY</h2>
+    <p>This is where my story with you starts.</p>
+    <p>The first time I saw you.</p>
+    <div class="ticket">
+      <div class="ticket-left">
+        <p class="ticket-kicker">location unlocked 📍</p>
+        <h3>Computer lab.</h3>
+        <p>I had no idea that seeing you in that computer lab would eventually become such an important moment in my life.</p>
+      </div>
+      <div class="ticket-right">
+        ★ ADMIT ONE ★
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 4: NICKNAMES - dossier files -->
+  <section id="ch4" class="chapter">
+    <p class="kicker">classified: origin stories nobody asked for</p>
+    <h2>And then you somehow ended up with these names...</h2>
+    <svg class="red-string" viewBox="0 0 400 200" aria-hidden="true">
+      <path d="M30 40 C 140 160, 260 -20, 370 100" fill="none" stroke="#e63956" stroke-width="3" stroke-dasharray="10 8" opacity=".7"/>
+      <circle cx="30" cy="40" r="6" fill="#e63956"/>
+      <circle cx="190" cy="85" r="6" fill="#e63956"/>
+      <circle cx="370" cy="100" r="6" fill="#e63956"/>
+    </svg>
+    <div class="files">
+      <article class="file">
+        <span class="file-tag">FILE NO. 001 — EYES ONLY</span>
+        <div class="file-emoji">🐛</div>
+        <h3>BUGS</h3>
+        <p>Don't ask.</p>
+        <span class="stamp">UNEXPLAINED</span>
+      </article>
+      <article class="file">
+        <span class="file-tag">FILE NO. 002 — EYES ONLY</span>
+        <div class="file-emoji">🦜</div>
+        <h3>TOTA</h3>
+        <p>Also don't ask.</p>
+        <span class="stamp">UNEXPLAINED</span>
+      </article>
+      <article class="file">
+        <span class="file-tag">FILE NO. 003 — EYES ONLY</span>
+        <div class="file-emoji">👀</div>
+        <h3>BONGI</h3>
+        <p>Definitely don't ask.</p>
+        <span class="stamp">UNEXPLAINED</span>
+      </article>
+    </div>
+    <p>And somehow... you answer to all three. <span class="muted">Iconic behaviour, honestly.</span></p>
+  </section>
+
+  <!-- CHAPTER 5: SRK - the marquee -->
+  <section id="ch5" class="chapter chapter-srk">
+    <div class="marquee-bar">★ SIDE A • 90s ROMANCE • DO NOT EJECT ★ SIDE A • 90s ROMANCE • DO NOT EJECT ★</div>
+    <p class="kicker">we need to talk.</p>
+    <h2>We need to address something.</h2>
+    <div class="srk-build">
+      <p>There is someone else in your life.</p>
+      <p>Someone who gets your attention very easily.</p>
+      <p>Someone whose songs can change your entire mood in 3 seconds.</p>
+    </div>
+    <div class="srk-reveal">
+      <div class="marquee-bulbs" aria-hidden="true"></div>
+      <h3>SHAH RUKH KHAN 👑😭</h3>
+      <p>And honestly... I think I have competition.</p>
+      <p class="muted">You love old Bollywood songs. You love 80s/90s magic. And apparently you love SRK even more than me?! Rude. Accurate, but rude.</p>
+      <div class="vs">
+        <button class="btn-me" id="meBtn">ME ❤️</button>
+        <button class="btn-srk" id="srkBtn">SRK 👑</button>
+      </div>
+      <div id="srkResult" class="srk-result hidden"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 6: MUSIC - cassette deck -->
+  <section id="ch6" class="chapter chapter-music">
+    <p class="kicker">intermission • for the 80s/90s girl 🎶</p>
+    <h2>Your personal radio station</h2>
+    <p class="muted">Drop your mp3s into <code>assets/</code> and list them in CONFIG. No pirated bangers bundled here.</p>
+    <div class="cassette" id="cassette">
+      <div class="cassette-top">
+        <div class="cassette-label"><span id="trackTitle">No song loaded</span><span id="trackArtist" class="muted"></span></div>
+        <div class="reels"><div class="reel" id="reelL"></div><div class="reel" id="reelR"></div></div>
+      </div>
+      <div class="cassette-progress"><input id="seekBar" type="range" min="0" max="100" value="0" aria-label="Seek" /><div class="time-row"><span id="tCur">0:00</span><span id="tDur">0:00</span></div></div>
+      <div class="cassette-controls">
+        <button id="prevBtn" aria-label="Previous">⏮</button>
+        <button id="playBtn" aria-label="Play">▶</button>
+        <button id="nextBtn" aria-label="Next">⏭</button>
+        <input id="volBar" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" />
+      </div>
+      <ol id="playlistEl" class="playlist"></ol>
+      <p class="note">Tip: add <code>assets/song1.mp3</code> — player handles the rest. 📻</p>
+    </div>
+    <audio id="audioEl" preload="metadata"></audio>
+  </section>
+
+  <!-- CHAPTER 7: WHY I LOVE YOU - sticky notes -->
+  <section id="ch7" class="chapter">
+    <p class="kicker">okay... jokes aside.</p>
+    <h2>Here's the actual reason I made this.</h2>
+    <div class="notes" id="notes"></div>
+    <p class="muted note">That's it. That's the answer. <span class="tiny">(edit these in CONFIG.reasons)</span></p>
+  </section>
+
+  <!-- CHAPTER 8: PHOTOS - the gallery -->
+  <section id="ch8" class="chapter">
+    <p class="kicker">evidence 📸</p>
+    <h2>Some of my favourite people in the world.</h2>
+    <p>Okay, technically it's just you. 😂</p>
+    <div class="gallery-actions">
+      <label class="btn-upload" for="uploadInput">+ ADD OUR PHOTOS 📸</label>
+      <input id="uploadInput" type="file" accept="image/*" multiple hidden />
+      <p class="note">adds photos only in this browser. double-click a photo for 💥</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <!-- lightbox -->
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-label="Photo viewer">
+    <button id="lbClose" aria-label="Close">✕</button>
+    <button id="lbPrev" aria-label="Previous">‹</button>
+    <img id="lbImg" alt="Memory photo enlarged" />
+    <button id="lbNext" aria-label="Next">›</button>
+    <p id="lbCap" class="lb-cap"></p>
+  </div>
+
+  <!-- CHAPTER 9: TIMELINE - our story -->
+  <section id="ch9" class="chapter">
+    <p class="kicker">our little story (so far)</p>
+    <h2>A very short, very real timeline.</h2>
+    <div class="timeline" id="timeline"></div>
+    <p class="note">To add moments: edit CONFIG.timeline. No fake trips. Only real stuff.</p>
+  </section>
+
+  <!-- CHAPTER 10: THE QUIET MOMENT -->
+  <section id="ch10" class="chapter chapter-quiet">
+    <p class="kicker">no jokes for a minute.</p>
+    <div class="quiet-card">
+      <p>I'm genuinely glad that I met you.</p>
+      <p>I'm glad that one random day in a computer lab happened.</p>
+      <p>And I'm really glad that you're part of my life.</p>
+      <p class="muted">— that's the whole speech. short, because I'd get emotional otherwise. 🥹</p>
+    </div>
+  </section>
+
+  <!-- CHAPTER 11: LOVE LETTER -->
+  <section id="ch11" class="chapter">
+    <p class="kicker">this one's actually for you ✉️</p>
+    <h2>A letter. On paper. (Kind of.)</p>
+    <article class="letter" id="letter">
+      <div class="letter-tape"></div>
+      <div class="seal" aria-hidden="true">V♥V</div>
+      <pre id="letterText" class="letter-body"></pre>
+    </article>
+    <p class="muted">I was going to write something extremely romantic here... then I remembered Shah Rukh Khan exists. 👑 <em>Had to share you for a second.</em></p>
+  </section>
+
+  <!-- CHAPTER 12: OPEN WHEN -->
+  <section id="ch12" class="chapter">
+    <p class="kicker">for future emergencies 🚨</p>
+    <h2>Open when...</h2>
+    <div class="cases">
+      <button class="case" data-case="sad">🥺 <span>OPEN WHEN YOU'RE SAD</span></button>
+      <button class="case" data-case="missYou">🫶 <span>OPEN WHEN YOU MISS ME</span></button>
+      <button class="case" data-case="angry">😤 <span>OPEN WHEN YOU'RE ANGRY</span></button>
+      <button class="case" data-case="smile">❤️ <span>OPEN WHEN YOU NEED A SMILE</span></button>
+    </div>
+  </section>
+
+  <div id="envelope" class="envelope-modal hidden" role="dialog" aria-label="Open when letter">
+    <div class="envelope-wrap">
+      <div class="flap"></div>
+      <div class="letter-inside">
+        <h3 id="envTitle">For you ❤️</h3>
+        <p id="envText"></p>
+        <button id="envClose" class="btn-ghost">seal it back 💌</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 12.5: THE GIFT -->
+  <section id="chGift" class="chapter">
+    <p class="kicker">one more thing...</p>
+    <h2>Your gift. 🎁</h2>
+    <p>I wrapped it myself. (There was no paper. Or gift. Just this.)</p>
+    <div class="scratch-wrap">
+      <div class="scratch-prize">
+        <p class="scratch-line">a lifetime supply of</p>
+        <h3>ME ❤️</h3>
+        <p class="note">sorry. no refunds. no exchanges.</p>
+      </div>
+      <canvas id="scratch" width="640" height="360"></canvas>
+    </div>
+    <p class="note" id="scratchHint">👆 scratch it off with your finger</p>
+    <button id="scratchSkip" class="btn-ghost">just show me 🙄</button>
+  </section>
+
+  <!-- CHAPTER 13: THE CAKE -->
+  <section id="ch13" class="chapter chapter-cake">
+    <p class="kicker">one last thing...</p>
+    <h2>Make a wish, <span class="gf">Vimmi</span>. 🎂</h2>
+    <p class="muted">Tap each candle to blow it out. (Mic blow is optional — tapping always works.)</p>
+    <div class="cake-wrap">
+      <div class="bunting" aria-hidden="true"></div>
+      <div class="cake" id="cake">
+        <div class="candles" id="candles"></div>
+        <div class="icing"><svg class="drip" viewBox="0 0 340 24" preserveAspectRatio="none"><path d="M0,0 H340 V8 C310,26 292,4 264,12 C236,20 218,4 190,12 C162,20 144,4 116,12 C88,20 70,4 42,12 C28,16 12,14 0,10 Z" fill="#fff"/></svg></div>
+        <div class="cake-body">
+          <div class="sprinkles" id="sprinkles"></div>
+          <div class="cake-face"><div class="face-eyes"><i class="eye"></i><i class="eye"></i></div><i class="blush l"></i><i class="blush r"></i><i class="smile"></i></div>
+          <span id="cakeText">HAPPY BIRTHDAY VIMMI</span>
+        </div>
+        <div class="plate"></div>
+      </div>
+      <div class="cake-controls">
+        <button id="micBtn" class="btn-ghost">🎤 enable blow-to-extinguish (optional)</button>
+        <button id="relightBtn" class="btn-ghost">↻ relight candles</button>
+      </div>
+      <p class="note" id="candleCount">5 candles still burning 🔥</p>
+    </div>
+    <div id="wishReveal" class="reveal hidden">
+      <h2>HAPPY BIRTHDAY, <span class="gf">VIMMI</span> ❤️</h2>
+      <p>Wish locked in. No take-backs. ✨</p>
+    </div>
+  </section>
+
+  <!-- CHAPTER 14: FINAL SRK JOKE -->
+  <section id="ch14" class="chapter">
+    <p class="kicker">before we finish...</p>
+    <h2>And <span class="gf">Vimmi</span>...</h2>
+    <p>I hope your birthday is perfect. I hope you get everything you want.</p>
+    <p>Even if one of those things is apparently Shah Rukh Khan. 😂</p>
+    <p><strong>But I'm still your favourite. Right? 👀</strong></p>
+    <div class="arena" id="arena2">
+      <button class="btn-yes" id="yes2">YES ❤️</button>
+      <button class="btn-no" id="no2">NO 😭</button>
+      <p class="taunt" id="taunt2">don't even think about it.</p>
+    </div>
+    <div id="yesReveal2" class="reveal hidden">
+      <p>Correct answer. SRK can be second favourite. I'm generous like that. 👑</p>
+    </div>
+  </section>
+
+  <!-- CHAPTER 15: FINALE -->
+  <section id="ch15" class="chapter chapter-finale">
+    <div class="finale-lines">
+      <p>It started on 10 January.</p>
+      <p>In a computer lab.</p>
+      <p>I saw you.</p>
+      <p>And somehow...</p>
+      <p>...I ended up making this entire ridiculous website for you.</p>
+      <p class="glow">Worth it. ❤️</p>
+    </div>
+    <h2>HAPPY BIRTHDAY, <span class="gf">VIMMI</span> ❤️</h2>
+    <p>Happy Birthday, Bugs. 🐛</p>
+    <p>I love you.</p>
+    <p class="muted">Here's to another year of you being you.</p>
+    <button id="replayBtn" class="enter-btn small"><span>REPLAY EVERYTHING 🔄</span></button>
+    <button id="partyBtn" class="enter-btn small"><span>EMERGENCY DANCE PARTY 🪩</span></button>
+    <p class="note">psst... there's a tiny <button id="secretHeart" class="inline-heart">❤️</button> and a <button id="srkCrown" class="inline-heart">👑</button> hiding here. don't tell anyone.</p>
+  </section>
+
+  <!-- CREDITS -->
+  <section id="credits" class="chapter credits-chapter">
+    <div class="credits-card">
+      <p class="kicker">the end ★</p>
+      <h3>STARRING <strong class="gf">Vimmi</strong></h3>
+      <p>featuring Shah Rukh Khan <span class="muted">(she insisted)</span></p>
+      <p>written, directed & over-engineered by <strong id="creditName">YOUR NAME</strong></p>
+      <p class="note">no runaway buttons were harmed in the making of this website</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- fx layers -->
+<div id="dimmer" aria-hidden="true"></div>
+<div id="disco" aria-hidden="true"></div>
+<div id="flicker" aria-hidden="true"></div>
+<div id="fx" aria-hidden="true"></div>
+<div id="bigFlash" aria-hidden="true"></div>
+<div id="bigHeart" aria-hidden="true"><div class="big-heart-svg" data-svg-heart="big"></div><div class="big-heart-text"></div></div>
+
+<!-- top nav -->
+<nav class="topnav" aria-label="Top">
+  <button id="logoBtn" class="logo" aria-label="Logo easter egg">V <span>❤</span> V</button>
+  <div class="nav-right">
+    <button id="musicToggle" class="pill" aria-label="Toggle music">♪ music</button>
+    <button id="sfxToggle" class="pill" aria-label="Toggle sound effects">🔔 sfx</button>
+    <button id="jumpCake" class="pill" aria-label="Jump to cake">🎂 wish</button>
+  </div>
+</nav>
+
+<!-- progress -->
+<div class="progress" aria-hidden="true"><div id="progBar"></div><div class="prog-heart">❤️</div></div>
+
+<!-- toasts -->
+<div id="toasts" aria-live="polite"></div>
+
+<script src="script.js?v=4"></script>
+</body>
+</html>
