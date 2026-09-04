@@ -13,7 +13,7 @@
    ============================================================ */
 const CONFIG = {
   girlfriendName: "Vimmi",
-  myName: "YOUR NAME", // <-- CHANGE ME, everything updates
+  myName: "mankiii",
   heroPhotos: [
     "assets/photo1.jpg", "assets/photo2.jpg", "assets/photo3.jpg",
     "assets/photo4.jpg", "assets/photo5.jpg", "assets/photo6.jpg",
@@ -39,8 +39,8 @@ const CONFIG = {
     { date: "ADD DATE", title: "ADD MOMENT", text: "ADD STORY — replace me in CONFIG.timeline" },
   ],
   musicPlaylist: [
-    { title: "Song 1 (add yours)", artist: "Artist", src: "assets/song1.mp3" },
-    { title: "Song 2 (add yours)", artist: "Artist", src: "assets/song2.mp3" },
+    { title: "Chaiyya Chaiyya", artist: "Sukhwinder Singh • Sapna Awasthi", youtube: "9MX-QejdVaQ" },
+    { title: "Ye Tune Kya Kiya", artist: "Javed Bashir • Pritam", youtube: "w9Qo6p4XsXE" },
   ],
   loveLetter: `Dear Vimmi,
 
@@ -99,6 +99,7 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const rand = (a, b) => a + Math.random() * (b - a);
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+function fmtT(s) { if (!isFinite(s)) return "0:00"; return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`; }
 const fxLayer = $("#fx"), flash = $("#bigFlash");
 const bigOverlay = $("#bigHeart"), bigText = $(".big-heart-text");
 
@@ -670,30 +671,98 @@ function initSrk() {
 
 /* ---------------- music ---------------- */
 const Music = {
-  idx: 0, audio: null, _noteTimer: null, _errToast: false,
-  list() { return CONFIG.musicPlaylist.filter((t) => t.src); },
+  idx: 0, audio: null, yt: null, _ytApi: null, _poll: null, _noteTimer: null, _errToast: false,
+  isYT(t) { return !!(t && t.youtube); },
+  list() { return CONFIG.musicPlaylist.filter((t) => t.src || t.youtube); },
   init() {
     this.audio = $("#audioEl");
     this.render();
     $("#playBtn").addEventListener("click", () => this.toggle());
     $("#nextBtn").addEventListener("click", () => this.step(1));
     $("#prevBtn").addEventListener("click", () => this.step(-1));
-    $("#volBar").addEventListener("input", (e) => (this.audio.volume = +e.target.value));
+    $("#volBar").addEventListener("input", (e) => {
+      const v = +e.target.value;
+      this.audio.volume = v;
+      try { this.yt?.setVolume(Math.round(v * 100)); } catch {}
+    });
     $("#seekBar").addEventListener("input", (e) => {
-      if (this.audio.duration) this.audio.currentTime = (+e.target.value / 100) * this.audio.duration;
+      const t = this.list()[this.idx];
+      const frac = +e.target.value / 100;
+      if (this.isYT(t) && this.yt) {
+        try { const d = this.yt.getDuration() || 0; if (d) this.yt.seekTo(frac * d, true); } catch {}
+      } else if (this.audio.duration) this.audio.currentTime = frac * this.audio.duration;
     });
     this.audio.addEventListener("timeupdate", () => {
       if (this.audio.duration) $("#seekBar").value = (this.audio.currentTime / this.audio.duration) * 100;
-      $("#tCur").textContent = fmt(this.audio.currentTime); $("#tDur").textContent = fmt(this.audio.duration || 0);
+      $("#tCur").textContent = fmtT(this.audio.currentTime); $("#tDur").textContent = fmtT(this.audio.duration || 0);
     });
     this.audio.addEventListener("ended", () => this.step(1));
     this.audio.addEventListener("error", () => {
       $("#playlistEl")?.children[this.idx]?.classList.add("missing");
       if (!this._errToast) { this._errToast = true; toast("That mp3 is missing from assets/ — add your files 📻"); }
     });
-    this.audio.addEventListener("play", () => { $("#playBtn").textContent = "⏸"; $("#reelL").classList.add("spin"); $("#reelR").classList.add("spin"); this._notes(); });
-    this.audio.addEventListener("pause", () => { $("#playBtn").textContent = "▶"; $("#reelL").classList.remove("spin"); $("#reelR").classList.remove("spin"); clearInterval(this._noteTimer); this._noteTimer = null; });
-    function fmt(s) { if (!isFinite(s)) return "0:00"; return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`; }
+    this.audio.addEventListener("play", () => this.setUI(true));
+    this.audio.addEventListener("pause", () => this.setUI(false));
+  },
+  setUI(playing) {
+    $("#playBtn").textContent = playing ? "⏸" : "▶";
+    $("#reelL").classList.toggle("spin", playing);
+    $("#reelR").classList.toggle("spin", playing);
+    if (playing) this._notes(); else { clearInterval(this._noteTimer); this._noteTimer = null; }
+  },
+  ytApi() {
+    if (this._ytApi) return this._ytApi;
+    this._ytApi = new Promise((resolve, reject) => {
+      if (window.YT?.Player) return resolve(window.YT);
+      const to = setTimeout(() => reject(new Error("yt-timeout")), 15000);
+      window.onYouTubeIframeAPIReady = () => { clearTimeout(to); resolve(window.YT); };
+      const s = document.createElement("script");
+      s.src = "https://www.youtube.com/iframe_api";
+      s.onerror = () => { clearTimeout(to); reject(new Error("yt-load")); };
+      document.head.appendChild(s);
+    });
+    return this._ytApi;
+  },
+  async ensureYT() {
+    const YT = await this.ytApi();
+    if (!this.yt) {
+      await new Promise((resolve) => {
+        this.yt = new YT.Player("ytPlayer", {
+          height: "4", width: "4",
+          playerVars: { autoplay: 0, controls: 0, disablekb: 1, fs: 0, rel: 0 },
+          events: {
+            onReady: () => resolve(),
+            onStateChange: (e) => this._ytState(e.data),
+            onError: () => { toast("That YouTube video won't play — skipping 📻"); this.step(1); },
+          },
+        });
+        setTimeout(resolve, 8000);
+      });
+    }
+    return this.yt;
+  },
+  _ytState(st) {
+    if (st === 0) { this.setUI(false); this._pollStop(); this.step(1); return; }
+    if (st === 1) { this.setUI(true); this._pollStart(); return; }
+    if (st === 2) { this.setUI(false); this._pollStop(); return; }
+  },
+  _pollStart() {
+    this._pollStop();
+    this._poll = setInterval(() => {
+      try {
+        if (!this.yt || this.yt.getPlayerState() !== 1) return;
+        const cur = this.yt.getCurrentTime(), dur = this.yt.getDuration() || 0;
+        if (dur) $("#seekBar").value = (cur / dur) * 100;
+        $("#tCur").textContent = fmtT(cur); $("#tDur").textContent = fmtT(dur);
+      } catch {}
+    }, 500);
+  },
+  _pollStop() { clearInterval(this._poll); this._poll = null; },
+  select(i) {
+    this._pollStop(); this.setUI(false);
+    try { this.audio.pause(); } catch {}
+    try { this.yt?.pauseVideo(); } catch {}
+    this.idx = i; this.render();
   },
   _notes() {
     if (reducedMotion || this._noteTimer) return;
@@ -711,7 +780,7 @@ const Music = {
     const pl = $("#playlistEl"); pl.innerHTML = "";
     this.list().forEach((t, i) => {
       const li = document.createElement("li");
-      li.textContent = `${t.title} — ${t.artist}`;
+      li.innerHTML = `${t.youtube ? "🎬 " : ""}${t.title} — ${t.artist}`;
       if (i === this.idx) li.classList.add("active");
       li.addEventListener("click", () => this.play(i));
       pl.appendChild(li);
@@ -720,19 +789,53 @@ const Music = {
     $("#trackTitle").textContent = t ? t.title : "Add mp3s to assets/ 🎶";
     $("#trackArtist").textContent = t ? " — " + t.artist : "";
   },
-  load(i) { const t = this.list()[i]; if (!t) return false; this.audio.src = t.src; this.idx = i; this.render(); return true; },
-  play(i = this.idx) {
-    if (!this.list().length) { toast("Add your mp3s to assets/ first 📻"); return; }
-    if (!this.audio.src || i !== this.idx) this.load(i);
-    this.audio.play().catch(() => toast("Couldn't play that file — check assets/ path 🎶"));
+  async play(i = this.idx) {
+    const list = this.list();
+    if (!list.length) { toast("Add your mp3s to assets/ first 📻"); return; }
+    const t = list[i]; if (!t) return;
+    if (this.isYT(t)) {
+      let vid = null;
+      try { vid = this.yt?.getVideoData?.()?.video_id; } catch {}
+      if (i !== this.idx || vid !== t.youtube) {
+        this.select(i);
+        try {
+          const p = await this.ensureYT();
+          p.setVolume(Math.round((+($("#volBar")?.value ?? 0.8)) * 100));
+          p.loadVideoById(t.youtube);
+          try { p.playVideo(); } catch {}
+        } catch { toast("YouTube couldn't load — check connection 📻"); }
+      } else { try { this.yt.playVideo(); } catch {} }
+    } else {
+      const want = new URL(t.src, location.href).href;
+      if (i !== this.idx || this.audio.src !== want) {
+        this.select(i);
+        this.audio.src = t.src;
+      }
+      this.audio.play().catch(() => toast("Couldn't play that file — check assets/ path 🎶"));
+    }
   },
-  toggle() { if (this.audio.paused) this.play(); else this.audio.pause(); },
+  toggle() {
+    const t = this.list()[this.idx];
+    if (this.isYT(t)) {
+      if (this.yt) {
+        try {
+          if (this.yt.getPlayerState() === 1) this.yt.pauseVideo();
+          else this.yt.playVideo();
+          return;
+        } catch {}
+      }
+      this.play(this.idx); return;
+    }
+    if (this.audio.paused) {
+      if (!this.audio.src) this.play(this.idx);
+      else this.audio.play().catch(() => {});
+    } else this.audio.pause();
+  },
   step(d) { const l = this.list().length; if (!l) return toast("Playlist is empty 📻"); this.play((this.idx + d + l) % l); },
   tryAutoplay() {
     if (!this.list().length) return;
     this.audio.volume = +($("#volBar")?.value ?? 0.8);
-    this.load(0);
-    this.audio.play().then(() => toast(`Now playing: ${this.list()[0].title} 🎶`)).catch(() => {});
+    Promise.resolve(this.play(0)).then(() => toast(`Now playing: ${this.list()[0].title} 🎶`)).catch(() => {});
   },
 };
 

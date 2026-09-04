@@ -248,6 +248,7 @@ code{background:rgba(255,209,102,.14);border:1px dashed rgba(255,209,102,.5);pad
   font-size:1.1rem;padding:.5rem .9rem;cursor:pointer;min-width:52px;min-height:48px;box-shadow:3px 3px 0 #000}
 .cassette-controls button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
 #volBar{flex:1;accent-color:var(--gold)}
+#ytPlayer{position:fixed;right:6px;bottom:6px;width:4px;height:4px;opacity:.02;pointer-events:none;z-index:120;overflow:hidden}
 .playlist{list-style:none;margin:1rem 0 0;padding:0;max-height:180px;overflow:auto;text-align:left}
 .playlist li{padding:.55rem .8rem;border-radius:8px;cursor:pointer;border:1px solid transparent;font-size:.95rem;font-weight:500}
 .playlist li.active{background:rgba(255,209,102,.14);border-color:var(--gold)}
